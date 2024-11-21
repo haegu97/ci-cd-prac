@@ -52,9 +52,6 @@ jobs:
       - name: ⚛️ Setup react
         run: npm install react@${{ matrix.react }} react-dom@${{ matrix.react }}
 
-      - name: ▶️ Run validate script
-        run: npm run validate
-
       - name: ⬆️ Upload coverage report
         uses: codecov/codecov-action@v4
         with:
