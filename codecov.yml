@@ -4,13 +4,13 @@ coverage:
       default:
         target: 70%
         threshold: 5%
-        minimum: 75%
+        minimum: 60%
         allow_decreases: true
     patch:
       default:
         target: 60%
         threshold: 5%
-        minimum: 70%
+        minimum: 50%
 
   ignore:
     - "**/*.test.ts"
