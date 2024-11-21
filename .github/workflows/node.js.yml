@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -24,13 +26,17 @@ jobs:
       - name: Build project
         run: npm run build
 
-      - name: Run tests
+      - name: Run tests with coverage
         run: npm run coverage
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          flags: frontend
           fail_ci_if_error: true
+          flags: frontend
           verbose: true
+          codecov_yml_path: ./codecov.yml
+          directory: ./coverage
+          base_sha: ${{ github.event.pull_request.base.sha }}
+          head_sha: ${{ github.event.pull_request.head.sha }}

@@ -2,42 +2,29 @@ coverage:
   status:
     project:
       default:
-        target: 80%
-        threshold: 2%
-        minimum: 75%
+        target: auto
+        threshold: 0%
     patch:
       default:
-        target: 80%
-        threshold: 2%
-        minimum: 70%
+        target: auto
+        threshold: 0%
 
-  ignore:
-    - "**/*.test.ts"
-    - "**/*.config.ts"
-    - "**/*.d.ts"
-    - "coverage/**/*"
+  precision: 2
+  round: down
+  range: "70...100"
+
+parsers:
+  javascript:
+    enable_partials: yes
 
 comment:
-  layout: "reach, diff, flags, files"
+  layout: "diff, files"
   behavior: default
   require_changes: false
-  require_base: false
-  require_head: true
   show_carryforward_flags: true
-  hide_project_coverage: false
-  hide_if_no_changes: false
-  show_coverage_table: true
-
-flags:
-  frontend:
-    paths:
-      - app/
-    carryforward: true
-
-codecov:
-  require_ci_to_pass: true
-  notify:
-    wait_for_ci: true
 
 github_checks:
   annotations: true
+
+fixes:
+  - "::/"
