@@ -3,6 +3,7 @@
 version: 2.1
 orbs:
   node: circleci/node@5
+  cypress: cypress-io/cypress@3
 jobs:
   test-node:
     # Install node dependencies and run tests
@@ -20,6 +21,16 @@ jobs:
           command: npm run test --ci --runInBand --reporters=default --reporters=jest-junit
       - store_test_results:
           path: ./test-results/
+
+  cypress-test:
+    executor: cypress/default
+    steps:
+      - checkout
+      - cypress/install
+      - cypress/run:
+          start-command: npm run dev
+          wait-on: "http://localhost:3000"
+
   build-node:
     # Build node project
     executor: node/default
@@ -47,17 +58,19 @@ jobs:
       # Replace this with steps to deploy to users
       - run:
           name: deploy
-          command: '#e.g. ./deploy.sh'
+          command: "#e.g. ./deploy.sh"
       - run:
           name: found github actions config
-          command: ':'
+          command: ":"
 workflows:
   build-and-test:
     jobs:
       - test-node
+      - cypress-test
       - build-node:
           requires:
             - test-node
+            - cypress-test
     # - deploy:
     #     requires:
     #       - build-node
