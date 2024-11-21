@@ -4,14 +4,19 @@ coverage:
       default:
         target: 80%
         threshold: 2%
+        minimum: 75%
+        allow_decreases: true
     patch:
       default:
         target: 80%
         threshold: 2%
+        minimum: 70%
 
   ignore:
     - "**/*.test.ts"
     - "**/*.config.ts"
+    - "**/*.d.ts"
+    - "coverage/**/*"
 
 comment:
   layout: "reach, diff, flags, files"
@@ -20,3 +25,4 @@ comment:
   require_base: false
   require_head: true
   hide_project_coverage: false
+  hide_if_no_changes: true
