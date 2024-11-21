@@ -7,4 +7,17 @@ describe("Page", () => {
     render(<Page />);
     expect(screen.getByText("Get started by editing")).toBeInTheDocument();
   });
+
+  it("renders navigation links", () => {
+    render(<Page />);
+    expect(screen.getByText("Deploy now")).toBeInTheDocument();
+    expect(screen.getByText("Read our docs")).toBeInTheDocument();
+  });
+
+  it("renders footer links", () => {
+    render(<Page />);
+    expect(screen.getByText("Learn")).toBeInTheDocument();
+    expect(screen.getByText("Examples")).toBeInTheDocument();
+    expect(screen.getByText(/Go to nextjs.org/)).toBeInTheDocument();
+  });
 });
