@@ -1,31 +1,21 @@
-name: GitHub Actions Demo
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
-on: [push]
-jobs:
-  validate:
-    runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'pull_request' }}  # PR 이벤트일 때만 실행
-    steps:
-      - name: ⬇️ Checkout repo
-        uses: actions/checkout@v4
+name: validate
+on:
+  push:
+    branches:
+      # Match SemVer major release branches
+      # e.g. "12.x" or "8.x"
+      - '[0-9]+.x'
+      - 'main'
+      - 'next'
+      - 'next-major'
+      - 'beta'
+      - 'alpha'
+      - '!all-contributors/**'
+  pull_request:
 
-      - name: ⎔ Setup node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '16'  # Node.js 버전 설정
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
-      - name: 📥 Download deps
-        uses: bahmutov/npm-install@v1
-        with:
-          useLockFile: false
-
-      - name: ⚛️ Setup react
-        run: npm install react@18.x react-dom@18.x
-
-      # 여기에 빌드와 테스트 명령어 추가
-      - name: 🏗️ Run build
-        run: npm run build   # PR 생성 시 빌드를 실행
-
-      - name: 🧪 Run tests
-        run: npm run test    # PR 생성 시 테스트 실행
-
+permissions:
+  actions: write #  to cancel/stop running workf
