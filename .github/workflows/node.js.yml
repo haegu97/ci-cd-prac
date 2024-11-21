@@ -1,7 +1,7 @@
 name: Build and Test Workflow
 
 on:
-  pull_request: # PR 생성 시 트리거
+  pull_request:
     branches:
       - main
 
@@ -28,6 +28,6 @@ jobs:
         run: npm test
 
       - name: Upload coverage reports to Codecov
-      uses: codecov/codecov-action@v4
-    with:
-      token: ${{ secrets.CODECOV_TOKEN }}
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
