@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next dev",
+    "start": "cypress run",
     "lint": "next lint",
     "test": "jest",
     "coverage": "jest --coverage",
