@@ -1,8 +1,14 @@
-/* eslint-disable */ const { defineConfig } = require("cypress");
+/* eslint-disable */
 
-module.exports = defineConfig({
+import { defineConfig } from "cypress";
+
+export default defineConfig({
   e2e: {
-    baseUrl: "http://localhost:3000",
-    supportFile: false,
+    setupNodeEvents(
+      on: Cypress.PluginEvents,
+      config: Cypress.PluginConfigOptions
+    ) {
+      // implement node event listeners here
+    },
   },
 });
