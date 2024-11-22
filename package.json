@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "start-server-and-test dev http://localhost:3000 cypress:run",
     "lint": "next lint",
     "test": "jest",
     "coverage": "jest --coverage",
